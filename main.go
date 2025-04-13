@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"math"
 )
@@ -35,15 +36,30 @@ func ExibirGeometria(g geometria) {
 func main() {
 	fmt.Println("Inicializando projeto...")
 
-	retangulo := retangulo{
-		largura: 1,
-		altura:  2,
+	p := ProblemaNetwork{
+		rede:     true,
+		hardware: false,
 	}
 
-	circulo := circulo{
-		radius: 4,
-	}
+	ExibirError(errors.New("A error"))
+	ExibirError(p)
+}
 
-	ExibirGeometria(retangulo)
-	ExibirGeometria(circulo)
+type ProblemaNetwork struct {
+	rede     bool
+	hardware bool
+}
+
+func (p ProblemaNetwork) Error() string {
+	if p.rede {
+		return "Problema de Rede"
+	} else if p.hardware {
+		return "Problema de Hardware"
+	} else {
+		return "Outro problema"
+	}
+}
+
+func ExibirError(err error) {
+	fmt.Println(err.Error())
 }

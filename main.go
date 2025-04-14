@@ -43,6 +43,26 @@ func main() {
 
 	ExibirError(errors.New("A error"))
 	ExibirError(p)
+
+	/* Interfaces vazias */
+	/* Posso armazenar struct, string, int, slice, qualquer valor */
+	/* Cuidado, para não cair na armadilha, pois as vezes você vai precisar saber o tipo do valor */
+
+	var sliceInterface []interface{}
+	sliceInterface = append(sliceInterface, 10)
+	sliceInterface = append(sliceInterface, true)
+	sliceInterface = append(sliceInterface, "Teste")
+
+	for _, valor := range sliceInterface {
+		v, ok := valor.(string)
+
+		if ok {
+			fmt.Println(v + " string")
+		} else {
+			fmt.Println(valor)
+		}
+	}
+
 }
 
 type ProblemaNetwork struct {
